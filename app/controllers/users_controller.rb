@@ -10,13 +10,38 @@ class UsersController < ApplicationController
     if @user.authenticate(params[:password])
        session[:user_id] = @user.id
 
-       redirect to "users/#{@user.id}"
+       redirect to "/users/#{@user.id}"
     else
 
     end
   end
+
+  get '/logout' do
+    session.clear
+
+    redirect to '/'
+  end
+
+  get '/signup' do
+   erb :signup
+  end
+
+  post '/users' do
+    if params[:name] != "" && params[:email] != "" && params[:password] != ""
+      @user = User.create(params)
+      session[:user_id] = @user.id
+
+      redirect to "/users/#{@user.id}"
+    else
+      redirect to '/signup'
+    end
+
+  end
+
    #users show route
   get '/users/:id' do
-    "users show route"
+    @user = User.find_by(id: params[:id])
+
+    erb :'/users/show'
   end
 end
