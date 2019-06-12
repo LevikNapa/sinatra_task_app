@@ -16,5 +16,13 @@ class TasksController < ApplicationController
       redirect to '/tasks/new'
     end
   end
-  
+
+  get '/tasks/:id' do
+    @task = Task.find_by(id: params[:id])
+    erb :'/tasks/show'
+  end
+
+  get '/tasks/:id/edit' do
+    erb :'/tasks/edit'
+  end
 end
