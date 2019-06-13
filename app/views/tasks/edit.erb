@@ -1,1 +1,7 @@
-edit form
+Edit Task:
+<form class="" action="/tasks/<%= @task.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="content">Content: </label>
+  <textarea name="content" style="width:auto; height:auto;"><%= @task.content %></textarea>
+  <input type="submit" name="" value="Edit Task">
+</form>
