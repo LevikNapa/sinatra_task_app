@@ -5,7 +5,7 @@ class TasksController < ApplicationController
     erb :'/tasks/index'
   end
 
-  
+
   get '/tasks/new' do
     erb :'/tasks/new'
   end
@@ -45,7 +45,7 @@ class TasksController < ApplicationController
   patch '/tasks/:id' do
     find_task
     if logged_in?
-      if @task.user == current_user
+      if @task.user == current_user && params[:content] != ""
 
          @task.update(content: params[:content])
          redirect to "/tasks/#{@task.id}"
@@ -54,6 +54,16 @@ class TasksController < ApplicationController
       end
     else
       redirect to '/'
+    end
+  end
+
+  delete '/tasks/:id' do
+    find_task
+    if @task.user == current_user
+      @task.destroy
+      redirect to '/tasks'
+    else
+      redirect to '/tasks'
     end
   end
 
