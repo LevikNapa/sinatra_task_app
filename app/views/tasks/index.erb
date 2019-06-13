@@ -1,0 +1,8 @@
+<h2>Task index page:</h2>
+
+<% @tasks.each do |task| %>
+<h4><a href="/tasks/<%= task.id %>"><%= task.created_at %></a></h4>
+<p><%= task.content %></p>
+<p>By <%= task.user.name %></p>
+<br><br>
+<% end %>

@@ -2,5 +2,7 @@
 
 <p><%= @task.content %></p>
 
-
+<% if current_user == @task.user %>
 <a href="/tasks/<%= @task.id %>/edit">Edit</a>
+
+<% end  %>

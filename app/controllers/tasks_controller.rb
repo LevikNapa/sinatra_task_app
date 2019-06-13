@@ -1,4 +1,11 @@
 class TasksController < ApplicationController
+
+  get '/tasks' do
+    @tasks = Task.all
+    erb :'/tasks/index'
+  end
+
+  
   get '/tasks/new' do
     erb :'/tasks/new'
   end
@@ -39,7 +46,7 @@ class TasksController < ApplicationController
     find_task
     if logged_in?
       if @task.user == current_user
-        
+
          @task.update(content: params[:content])
          redirect to "/tasks/#{@task.id}"
       else
