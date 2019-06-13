@@ -4,5 +4,10 @@
 
 <% if current_user == @task.user %>
 <a href="/tasks/<%= @task.id %>/edit">Edit</a>
+<br><br>
+<form class="" action="/tasks/<%= @task.id %>" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" name="" value="Delete Entry">
+</form>
 
 <% end  %>
