@@ -18,11 +18,41 @@ class TasksController < ApplicationController
   end
 
   get '/tasks/:id' do
-    @task = Task.find_by(id: params[:id])
+    find_task
     erb :'/tasks/show'
   end
 
   get '/tasks/:id/edit' do
-    erb :'/tasks/edit'
+    find_task
+    if logged_in?
+      if @task.user == current_user
+         erb :'/tasks/edit'
+      else
+         redirect to "/users/#{@task.id}"
+      end
+    else
+     redirect to '/'
+    end
+  end
+
+  patch '/tasks/:id' do
+    find_task
+    if logged_in?
+      if @task.user == current_user
+        
+         @task.update(content: params[:content])
+         redirect to "/tasks/#{@task.id}"
+      else
+         redirect to "/users/#{@task.id}"
+      end
+    else
+      redirect to '/'
+    end
+  end
+
+  private
+
+  def find_task
+    @task = Task.find_by(id: params[:id])
   end
 end
