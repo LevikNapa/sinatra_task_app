@@ -16,10 +16,12 @@ class TasksController < ApplicationController
     end
 
     if params[:content] != ""
+      flash[:message] = "Task successfully created"
       @task = Task.create(content: params[:content], user_id: current_user.id)
 
       redirect to "/tasks/#{@task.id}"
     else
+      flash[:message] = "Please try again"
       redirect to '/tasks/new'
     end
   end
