@@ -21,7 +21,7 @@ class TasksController < ApplicationController
 
       redirect to "/tasks/#{@task.id}"
     else
-      flash[:message] = "Please try again"
+      flash[:errors] = "Please try again"
       redirect to '/tasks/new'
     end
   end
@@ -50,6 +50,7 @@ class TasksController < ApplicationController
       if @task.user == current_user && params[:content] != ""
 
          @task.update(content: params[:content])
+         flash[:message] = "Successfully updated"
          redirect to "/tasks/#{@task.id}"
       else
          redirect to "/users/#{@task.id}"
@@ -63,6 +64,7 @@ class TasksController < ApplicationController
     find_task
     if @task.user == current_user
       @task.destroy
+      flash[:message] = "You have successfully deleted that entry"
       redirect to '/tasks'
     else
       redirect to '/tasks'
