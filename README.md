@@ -1,4 +1,4 @@
-This is a simple Sinatra Task application which allows users to signup, login and create tasks that need to get done. A user can edit also edit and delete their own tasks that they have created. I hope you enjoy!
+This is a simple Sinatra Task application which allows users to signup, login and create tasks that need to get done. A user can also edit and delete their own tasks that they have created. I hope you enjoy!
 
 Usage:
 
